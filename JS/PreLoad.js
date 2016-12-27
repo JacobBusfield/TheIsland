@@ -18,14 +18,15 @@ var PreLoad = {
 		/** GAME ASSETS **/
 		// 
 		// Images 
-    //game.load.image('tile', '../assets/tile.png');
-    game.load.image('water', 'Images/tiles/water.png');
+    game.load.image('w', 'Images/tiles/water.png');
+    game.load.image('g', 'Images/tiles/grass.png');
+    game.load.image('p', 'Images/tiles/path.png');
+    
+    game.load.image('bh', 'Images/tiles/bhgrass.png');
+    game.load.image('gh', 'Images/tiles/ghgrass.png');
 		
 		// Sprite sheets
 		game.load.spritesheet('imgStartButton', 'Images/startButton.png', 193, 67);
-		//game.load.spritesheet('tiles', 'Images/tribalhero_graphics/Tilemap.large.png', 108, 108);
-    game.load.atlasXML('tiles', 'Images/tiles/landscape_sheet.png', 'Images/tiles/landscape_sheet.xml');
-		game.load.spritesheet('imgbotty', 'Images/botty.png', 48, 78);
     
 		// Audio
 		// game.load.audio('sLaser', 'Audio/laser.wav');

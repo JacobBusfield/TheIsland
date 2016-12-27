@@ -34,11 +34,11 @@ Game.Boot.prototype =
         
         var tilemap = [
             'w', 'w', 'w', 'w', 'w', 'w', 'w',
-            'w', 17, 17, 17, 17, 17, 'w',
-            'w', 17, 17, 17, 17, 17, 'w',
-            'w', 17, 17, 17, 17, 17, 'w',
-            'w', 17, 17, 17, 17, 17, 'w',
-            'w', 17, 17, 17, 17, 17, 'w',
+            'w', 'g', 'g', 'g', 'g', 'g', 'w',
+            'w', 'g', 'g', 'g', 'g', 'g', 'w',
+            'w', 'gh', 'g', 'g', 'g', 'bh', 'w',
+            'w', 'g', 'g', 'g', 'g', 'g', 'w',
+            'w', 'g', 'g', 'g', 'g', 'g', 'w',
             'w', 'w', 'w', 'w', 'w', 'w', 'w',
         ];
         
@@ -49,14 +49,13 @@ Game.Boot.prototype =
             for (var yy = 0; yy < size*7; yy += size) {
                 // Create a tile using the new game.add.isoSprite factory method at the specified position.
                 // The last parameter is the group you want to add it to (just like game.add.sprite)
-                if (tilemap[i] === 'w'){
-                  tile = game.add.isoSprite(xx, yy, 0, 'water', 1, isoGroup);
+                tile = game.add.isoSprite(xx, yy, 0, tilemap[i], 1, isoGroup);
+                if(tilemap[i] === 'bh' || tilemap[i] === 'gh'){
+                  tile.anchor.set(0.5, 0.31);
                 }
                 else{
-                  tile = game.add.isoSprite(xx, yy, 0, 'tiles', tilemap[i], isoGroup);
+                  tile.anchor.set(0.5, 0);
                 }
-                
-                tile.anchor.set(0.5, 0);
                 
                 if (tilemap[i] === 'w') {
                   water.push(tile);
