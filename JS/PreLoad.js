@@ -30,9 +30,6 @@ var PreLoad = {
     
 		// Audio
 		// game.load.audio('sLaser', 'Audio/laser.wav');
-		// game.load.audio('sExplode', 'Audio/explode.wav');
-		// game.load.audio('sThunder', 'Audio/thunder.wav');
-		// game.load.audio('sRaining', 'Audio/raining.wav');
 		// game.load.audio('sMusic', 'Audio/noSleep.mp3');		
     },
 

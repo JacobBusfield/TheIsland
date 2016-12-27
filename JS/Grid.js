@@ -27,6 +27,7 @@ var Grid = function(game){
       tile.isoGroupIndex = (7*i)+j;
       if(this.grid[i][j] === 'bh' || this.grid[i][j] === 'gh'){
         tile.anchor.set(0.5, 0.31);
+        tile.pattern = 'star';
       }
       else{
         tile.anchor.set(0.5, 0);
@@ -35,14 +36,14 @@ var Grid = function(game){
       if (this.grid[i][j] === 'w') {
         this.water.push(tile);
       }
-      
       j+=1;
     }
     i+=1;
   }
   
   // click event
-  game.input.onDown.add(function () {
+  game.input.tapRate = 500; 
+  game.input.onTap.add(function () {
     var nothingClicked = true;
     selected.clearNeighbours();
     isoGroup.forEach(function (tile) {
@@ -52,25 +53,7 @@ var Grid = function(game){
         selected.setToTile(tile);
         
         tile.tint = 0xff0000;
-          
-          // ################################### TODO move this to allow different neighbour methods. ################################### //
-          if (tile.isoGroupIndex-7 >= 0){
-            selected.setNeighbours(tile.isoGroupIndex - 7);
-            isoGroup.children[tile.isoGroupIndex - 7].tint = 0x880000;
-          }
-          if ((tile.isoGroupIndex-1 >= 0) && (tile.isoGroupIndex % 7 !== 0)){ // check for grid underlap
-            selected.setNeighbours(tile.isoGroupIndex - 1);
-            isoGroup.children[tile.isoGroupIndex - 1].tint = 0x880000;
-          }
-          if ((tile.isoGroupIndex+1 < 49)&& (tile.isoGroupIndex % 7 !== 6)){  // check for grid overlap
-            selected.setNeighbours(tile.isoGroupIndex +1);
-            isoGroup.children[tile.isoGroupIndex +1].tint = 0x880000;
-          }
-          if (tile.isoGroupIndex+7 < 49){
-            selected.setNeighbours(tile.isoGroupIndex +7);
-            isoGroup.children[tile.isoGroupIndex + 7].tint = 0x880000;
-          }
-          // ################################### TODO move this to allow different neighbour methods. ################################### //
+        this.toggleNeighbours(tile);
       }
     });
     if (nothingClicked) {
@@ -79,7 +62,7 @@ var Grid = function(game){
   }, this);
   
   this.update = function(){  
-    // Remaining tiles allow scroll over animations.
+    // Unselected/ not-neighbour tiles allow scroll over animations.
     isoGroup.forEach(function (tile) {
       if ((tile !== selected.get()) && !selected.checkNeighbours(tile.isoGroupIndex)){
         var inBounds = tile.isoBounds.containsXY(cursorPos.x, cursorPos.y);
@@ -98,13 +81,34 @@ var Grid = function(game){
         }  
       }
     });
-    
-    
-    
+
     // Wobble water tiles
     this.water.forEach(function (w) {
         w.isoZ = (-2 * Math.sin((game.time.now + (w.isoX * 7)) * 0.004)) + (-1 * Math.sin((game.time.now + (w.isoY * 8)) * 0.005));
         w.alpha = Phaser.Math.clamp(1 + (w.isoZ * 0.1), 0.2, 1);
     });
+  }
+}
+
+function toggleNeighbours(tile){
+  switch(tile.pattern){
+    case 'star':
+      if (tile.isoGroupIndex-7 >= 0){
+        selected.setNeighbours(tile.isoGroupIndex - 7);
+        isoGroup.children[tile.isoGroupIndex - 7].tint = 0x880000;
+      }
+      if ((tile.isoGroupIndex-1 >= 0) && (tile.isoGroupIndex % 7 !== 0)){ // check for grid underlap
+        selected.setNeighbours(tile.isoGroupIndex - 1);
+        isoGroup.children[tile.isoGroupIndex - 1].tint = 0x880000;
+      }
+      if ((tile.isoGroupIndex+1 < 49)&& (tile.isoGroupIndex % 7 !== 6)){  // check for grid overlap
+        selected.setNeighbours(tile.isoGroupIndex +1);
+        isoGroup.children[tile.isoGroupIndex +1].tint = 0x880000;
+      }
+      if (tile.isoGroupIndex+7 < 49){
+        selected.setNeighbours(tile.isoGroupIndex +7);
+        isoGroup.children[tile.isoGroupIndex + 7].tint = 0x880000;
+      }
+      break;
   }
 }
