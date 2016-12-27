@@ -23,7 +23,7 @@ var PreLoad = {
 		// Sprite sheets
 		game.load.spritesheet('imgStartButton', 'Images/startButton.png', 193, 67);
 		game.load.spritesheet('tiles', 'Images/tribalhero_graphics/Tilemap.large.png', 108, 108);
-		//game.load.atlasJSONHash('tileset', 'Images/tileset.png', 'Images/tileset.json');
+		game.load.spritesheet('imgbotty', 'Images/botty.png', 64, 104);
     
 		// Audio
 		// game.load.audio('sLaser', 'Audio/laser.wav');
