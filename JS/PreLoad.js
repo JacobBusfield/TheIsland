@@ -19,11 +19,13 @@ var PreLoad = {
 		// 
 		// Images 
     //game.load.image('tile', '../assets/tile.png');
+    game.load.image('water', 'Images/tiles/water.png');
 		
 		// Sprite sheets
 		game.load.spritesheet('imgStartButton', 'Images/startButton.png', 193, 67);
-		game.load.spritesheet('tiles', 'Images/tribalhero_graphics/Tilemap.large.png', 108, 108);
-		game.load.spritesheet('imgbotty', 'Images/botty.png', 64, 104);
+		//game.load.spritesheet('tiles', 'Images/tribalhero_graphics/Tilemap.large.png', 108, 108);
+    game.load.atlasXML('tiles', 'Images/tiles/landscape_sheet.png', 'Images/tiles/landscape_sheet.xml');
+		game.load.spritesheet('imgbotty', 'Images/botty.png', 48, 78);
     
 		// Audio
 		// game.load.audio('sLaser', 'Audio/laser.wav');

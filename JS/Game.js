@@ -19,11 +19,11 @@ Game.Boot.prototype =
 
         
         game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);
-        game.stage.backgroundColor = "#4a9b8d";
+        game.stage.backgroundColor = "#2ebdd3";
         
         // This is used to set a game canvas-based offset for the 0, 0, 0 isometric coordinate - by default
         // this point would be at screen coordinates 0, 0 (top left) which is usually undesirable.
-        game.iso.anchor.setTo(0.5, 0.1);
+        game.iso.anchor.setTo(0.5, 0.3);
     },
     create: function () {
         // Create a group for our tiles.
@@ -33,30 +33,32 @@ Game.Boot.prototype =
         game.physics.isoArcade.gravity.setTo(0, 0, -500);
         
         var tilemap = [
-            74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74,
-            74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74,
-            74, 74, 92, 88, 88, 88, 88, 88, 95, 74, 74,
-            74, 74, 106, 112, 112, 112, 112, 112, 102, 74, 74,
-            74, 74, 106, 112, 112, 112, 112, 112, 102, 74, 74,
-            74, 74, 106, 112, 112, 112, 112, 112, 102, 74, 74,
-            74, 74, 106, 112, 112, 112, 112, 112, 102, 74, 74,
-            74, 74, 106, 112, 112, 112, 112, 112, 102, 74, 74,
-            74, 74, 93, 108, 108, 108, 108, 108, 97, 74, 74,
-            74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74,
-            74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74,
+            'w', 'w', 'w', 'w', 'w', 'w', 'w',
+            'w', 17, 17, 17, 17, 17, 'w',
+            'w', 17, 17, 17, 17, 17, 'w',
+            'w', 17, 17, 17, 17, 17, 'w',
+            'w', 17, 17, 17, 17, 17, 'w',
+            'w', 17, 17, 17, 17, 17, 'w',
+            'w', 'w', 'w', 'w', 'w', 'w', 'w',
         ];
         
         // Add tiles to map
-        var size = 54;
+        var size = 76;
         var i = 0, tile;
-        for (var xx = 0; xx < size*11; xx += size) {
-            for (var yy = 0; yy < size*11; yy += size) {
+        for (var xx = 0; xx < size*7; xx += size) {
+            for (var yy = 0; yy < size*7; yy += size) {
                 // Create a tile using the new game.add.isoSprite factory method at the specified position.
                 // The last parameter is the group you want to add it to (just like game.add.sprite)
-                tile = game.add.isoSprite(xx, yy, 0, 'tiles', tilemap[i], isoGroup);
-                tile.anchor.set(0.5, 0.5);
+                if (tilemap[i] === 'w'){
+                  tile = game.add.isoSprite(xx, yy, 0, 'water', 1, isoGroup);
+                }
+                else{
+                  tile = game.add.isoSprite(xx, yy, 0, 'tiles', tilemap[i], isoGroup);
+                }
                 
-                if (tilemap[i] === 74) {
+                tile.anchor.set(0.5, 0);
+                
+                if (tilemap[i] === 'w') {
                   water.push(tile);
                 }
                 
@@ -82,9 +84,6 @@ Game.Boot.prototype =
             selected.setInactive();    
           }
         }, this);
-
-        // Player
-        this.player = new Botty(game);
     },
     update: function () {
         // Update the cursor position.
@@ -117,8 +116,6 @@ Game.Boot.prototype =
             w.isoZ = (-2 * Math.sin((game.time.now + (w.isoX * 7)) * 0.004)) + (-1 * Math.sin((game.time.now + (w.isoY * 8)) * 0.005));
             w.alpha = Phaser.Math.clamp(1 + (w.isoZ * 0.1), 0.2, 1);
         });
-        
-        this.player.update();
     },
     render: function () {
         isoGroup.forEach(function (tile) {
