@@ -4,8 +4,6 @@ var Game = function (game) { };
 
 Game.Boot = function (game) { };
 
-
-
 Game.Boot.prototype =
 {
   preload: function () {

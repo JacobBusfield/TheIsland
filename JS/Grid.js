@@ -1,8 +1,10 @@
 var isoGroup;
-var selected = new Selected();  
+var selected = new Selected(); 
+var ui; 
   
 var Grid = function(game){
   isoGroup = game.add.group();
+  ui = new UI();
   
   this.grid = [
     ['w', 'w', 'w', 'w', 'w', 'w', 'w'],
@@ -27,14 +29,15 @@ var Grid = function(game){
       tile.isoGroupIndex = (7*i)+j;
       if(this.grid[i][j] === 'bh' || this.grid[i][j] === 'gh'){
         tile.anchor.set(0.5, 0.31);
-        tile.pattern = 'star';
+        tile.code = 'h';
+      }
+      else if (this.grid[i][j] === 'w') {
+        tile.anchor.set(0.5, 0);
+        tile.code = 'w';
+        this.water.push(tile);
       }
       else{
         tile.anchor.set(0.5, 0);
-      }
-      
-      if (this.grid[i][j] === 'w') {
-        this.water.push(tile);
       }
       j+=1;
     }
@@ -45,19 +48,24 @@ var Grid = function(game){
   game.input.tapRate = 500; 
   game.input.onTap.add(function () {
     var nothingClicked = true;
-    selected.clearNeighbours();
-    isoGroup.forEach(function (tile) {
-      var inBounds = tile.isoBounds.containsXY(cursorPos.x, cursorPos.y);
-      if(inBounds){
-        nothingClicked = false;
-        selected.setToTile(tile);
-        
-        tile.tint = 0xff0000;
-        this.toggleNeighbours(tile);
+
+    if (!ui.isBeingUsed()){
+      ui.clear();
+      selected.clearNeighbours();
+      
+      isoGroup.forEach(function (tile) {
+        var inBounds = tile.isoBounds.containsXY(cursorPos.x, cursorPos.y);
+        if(inBounds){
+          nothingClicked = false;
+          selected.setToTile(tile);
+          
+          tile.tint = 0xff0000;
+          ui.addPopUp(tile);
+        }
+      });
+      if (nothingClicked) {
+        selected.setInactive();
       }
-    });
-    if (nothingClicked) {
-      selected.setInactive();    
     }
   }, this);
   
@@ -66,7 +74,7 @@ var Grid = function(game){
     isoGroup.forEach(function (tile) {
       if ((tile !== selected.get()) && !selected.checkNeighbours(tile.isoGroupIndex)){
         var inBounds = tile.isoBounds.containsXY(cursorPos.x, cursorPos.y);
-        if (!tile.selected && inBounds) {
+        if (!tile.selected && inBounds && !ui.isBeingUsed()) {
           tile.selected = true;
           tile.tint = 0x86bfda;
           game.add.tween(tile).to({ isoZ: 12 }, 200, Phaser.Easing.Quadratic.InOut, true);
@@ -87,28 +95,5 @@ var Grid = function(game){
         w.isoZ = (-2 * Math.sin((game.time.now + (w.isoX * 7)) * 0.004)) + (-1 * Math.sin((game.time.now + (w.isoY * 8)) * 0.005));
         w.alpha = Phaser.Math.clamp(1 + (w.isoZ * 0.1), 0.2, 1);
     });
-  }
-}
-
-function toggleNeighbours(tile){
-  switch(tile.pattern){
-    case 'star':
-      if (tile.isoGroupIndex-7 >= 0){
-        selected.setNeighbours(tile.isoGroupIndex - 7);
-        isoGroup.children[tile.isoGroupIndex - 7].tint = 0x880000;
-      }
-      if ((tile.isoGroupIndex-1 >= 0) && (tile.isoGroupIndex % 7 !== 0)){ // check for grid underlap
-        selected.setNeighbours(tile.isoGroupIndex - 1);
-        isoGroup.children[tile.isoGroupIndex - 1].tint = 0x880000;
-      }
-      if ((tile.isoGroupIndex+1 < 49)&& (tile.isoGroupIndex % 7 !== 6)){  // check for grid overlap
-        selected.setNeighbours(tile.isoGroupIndex +1);
-        isoGroup.children[tile.isoGroupIndex +1].tint = 0x880000;
-      }
-      if (tile.isoGroupIndex+7 < 49){
-        selected.setNeighbours(tile.isoGroupIndex +7);
-        isoGroup.children[tile.isoGroupIndex + 7].tint = 0x880000;
-      }
-      break;
   }
 }

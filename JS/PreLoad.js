@@ -28,6 +28,11 @@ var PreLoad = {
 		// Sprite sheets
 		game.load.spritesheet('imgStartButton', 'Images/startButton.png', 193, 67);
     
+    
+    //ui
+    game.load.image('uibox', 'Images/ui/box.png');
+    game.load.image('uibc', 'Images/ui/bcbox.png');
+    
 		// Audio
 		// game.load.audio('sLaser', 'Audio/laser.wav');
 		// game.load.audio('sMusic', 'Audio/noSleep.mp3');		
