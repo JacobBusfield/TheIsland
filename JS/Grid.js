@@ -50,7 +50,7 @@ var Grid = function(game){
           nothingClicked = false;
           selected.setToTile(tile);
           
-          tile.tint = 0xff0000;
+          tile.tint = game.turn.tint();
           ui.addPopUp(tile);
         }
       });
@@ -67,7 +67,7 @@ var Grid = function(game){
         var inBounds = tile.isoBounds.containsXY(cursorPos.x, cursorPos.y);
         if (!tile.selected && inBounds && !ui.isBeingUsed()) {
           tile.selected = true;
-          tile.tint = 0x86bfda;
+          tile.tint = game.turn.tint();
           game.add.tween(tile).to({ isoZ: 12 }, 200, Phaser.Easing.Quadratic.InOut, true);
         }
         else if (!inBounds) {

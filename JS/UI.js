@@ -46,7 +46,7 @@ var UI = function(){
       
       box.events.onInputOver.add(function(){
         if(selected.isActive()){ // Checking active fixes bug of unselect and hovering on panel.
-          game.add.tween(box).to({ tint: 0xFF9999 }, 100, Phaser.Easing.Quadratic.InOut, true);
+          game.add.tween(box).to({ tint: game.turn.tint() }, 100, Phaser.Easing.Quadratic.InOut, true);
           toggleNeighbours(tile, power.pattern);
           uiGroup.hovered = true;
         }
@@ -67,6 +67,8 @@ var UI = function(){
         getNeighbours(box.tile, power.pattern).forEach(function (tile) {
           tile.changeTo(power.changeTo);
         });
+        
+        game.turn.toggle();
         
         uiGroup.hovered = false;
       }, this);

@@ -2,7 +2,7 @@ function toggleNeighbours(tile, pattern){
   var n = getNeighbours(tile, pattern);
   n.forEach(function (tile) {
     selected.setNeighbours(tile.isoGroupIndex);
-    tile.tint = 0x880000;
+    tile.tint = game.turn.tint();
   });
 }
 
