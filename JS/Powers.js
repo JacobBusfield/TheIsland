@@ -7,8 +7,13 @@ function getPowers(tile){
   else if ((tile.code.charAt(0) == 'g') && (game.turn.isPlayerOne())){
     return [];
   }
+  
+  // NEXT disable tile not adjacent to freindly structures.
+  if(!isTilePlayable(tile)){
+    return [];
+  }
     
-  // Get powers available to the player
+  // OK - Get powers available to the player
   var powers = [];
   switch(tile.code){
     case 'bh':
@@ -17,7 +22,7 @@ function getPowers(tile){
       powers.push({img: 'uig', pattern: 'ring-w', changeTo: 'g'});
       break;
     case 'd':
-      powers.push({img: 'uibox', pattern: 'star-w', changeTo: 'bh'});
+      powers.push({img:'ui'+game.turn.getPrefix()+'h', pattern: 'me', changeTo: game.turn.getPrefix()+'h'});
       break;
   }
   return powers;

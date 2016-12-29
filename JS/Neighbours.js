@@ -11,6 +11,10 @@ function getNeighbours(tile, pattern){
   var n = [];
   
   switch(pattern){
+    case 'me':
+      n.push(isoGroup.children[tile.isoGroupIndex]);
+      break;
+      
     case 'star':
       if (tile.isoGroupIndex-7 >= 0){
         n.push(isoGroup.children[tile.isoGroupIndex - 7]);
@@ -32,12 +36,12 @@ function getNeighbours(tile, pattern){
           n.push(isoGroup.children[tile.isoGroupIndex - 8]);
         }
       }
-      if ((tile.isoGroupIndex-6 < 49)&& (tile.isoGroupIndex % 7 !== 6)){  // check for grid overlap
+      if ((tile.isoGroupIndex-6 >= 0)&& (tile.isoGroupIndex % 7 !== 6)){  // check for grid overlap
         if (isoGroup.children[tile.isoGroupIndex - 6].code !== 'w'){
           n.push(isoGroup.children[tile.isoGroupIndex - 6]);
         }
       }
-      if ((tile.isoGroupIndex+6 >= 0) && (tile.isoGroupIndex % 7 !== 0)){ // check for grid underlap
+      if ((tile.isoGroupIndex+6 < 49) && (tile.isoGroupIndex % 7 !== 0)){ // check for grid underlap
         if (isoGroup.children[tile.isoGroupIndex + 6].code !== 'w'){
           n.push(isoGroup.children[tile.isoGroupIndex + 6]);
         }

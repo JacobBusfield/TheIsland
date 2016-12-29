@@ -32,9 +32,12 @@ var PreLoad = {
     
     //ui
     game.load.image('uibox', 'Images/ui/box.png');
-    game.load.image('uibc', 'Images/ui/bcbox.png');
     game.load.image('uid', 'Images/ui/dbox.png');
     game.load.image('uig', 'Images/ui/gbox.png');
+    
+    game.load.image('uibc', 'Images/ui/bcbox.png');
+    game.load.image('uibh', 'Images/ui/bhbox.png');
+    game.load.image('uigh', 'Images/ui/ghbox.png');
 		
     
 		// Audio

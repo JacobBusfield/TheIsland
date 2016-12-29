@@ -12,8 +12,8 @@ Game.Boot.prototype =
     game.stage.disableVisibilityChange = true;
     game.plugins.add(new Phaser.Plugin.Isometric(game));
     game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);
-    game.stage.backgroundColor = "#2ebdd3";
-    game.iso.anchor.setTo(0.5, 0.3);
+    game.stage.backgroundColor = "#fdfd96";
+    game.iso.anchor.setTo(0.5, 0.1);
   },
   create: function () {
     game.turn = new Turn();

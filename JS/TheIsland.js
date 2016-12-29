@@ -1,6 +1,6 @@
 var game;
 
-game = new Phaser.Game(1024, 800, Phaser.AUTO, 'phaserGame');
+game = new Phaser.Game(1024, 600, Phaser.AUTO, 'phaserGame');
 
 game.state.add('PreBoot', PreBoot);
 game.state.add('PreLoad', PreLoad);

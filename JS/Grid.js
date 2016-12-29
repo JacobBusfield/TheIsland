@@ -67,7 +67,6 @@ var Grid = function(game){
         var inBounds = tile.isoBounds.containsXY(cursorPos.x, cursorPos.y);
         if (!tile.selected && inBounds && !ui.isBeingUsed()) {
           tile.selected = true;
-          tile.tint = game.turn.tint();
           game.add.tween(tile).to({ isoZ: 12 }, 200, Phaser.Easing.Quadratic.InOut, true);
         }
         else if (!inBounds) {
@@ -84,7 +83,7 @@ var Grid = function(game){
     // Wobble water tiles
     water.forEach(function (w) {
         w.isoZ = (-2 * Math.sin((game.time.now + (w.isoX * 7)) * 0.004)) + (-1 * Math.sin((game.time.now + (w.isoY * 8)) * 0.005));
-        w.alpha = Phaser.Math.clamp(1 + (w.isoZ * 0.1), 0.2, 1);
+        w.alpha = Phaser.Math.clamp(1 + (w.isoZ * 0.05), 0.2, 1);
     });
   }
 }
