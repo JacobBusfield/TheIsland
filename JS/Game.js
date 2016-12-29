@@ -13,7 +13,7 @@ Game.Boot.prototype =
     game.plugins.add(new Phaser.Plugin.Isometric(game));
     game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);
     game.stage.backgroundColor = "#fdfd96";
-    game.iso.anchor.setTo(0.5, 0.1);
+    game.iso.anchor.setTo(0.5, 0.02);
   },
   create: function () {
     game.turn = new Turn();
