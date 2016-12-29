@@ -63,6 +63,11 @@ var UI = function(){
         ui.clear();
         selected.clearNeighbours();
         selected.setInactive();
+        
+        getNeighbours(box.tile, power.pattern).forEach(function (tile) {
+          tile.changeTo(power.changeTo);
+        });
+        
         uiGroup.hovered = false;
       }, this);
       

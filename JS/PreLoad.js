@@ -21,10 +21,11 @@ var PreLoad = {
     game.load.image('w', 'Images/tiles/water.png');
     game.load.image('g', 'Images/tiles/grass.png');
     game.load.image('p', 'Images/tiles/path.png');
+    game.load.image('d', 'Images/tiles/dirt.png');
     
     game.load.image('bh', 'Images/tiles/bhgrass.png');
     game.load.image('gh', 'Images/tiles/ghgrass.png');
-		
+
 		// Sprite sheets
 		game.load.spritesheet('imgStartButton', 'Images/startButton.png', 193, 67);
     
@@ -32,6 +33,9 @@ var PreLoad = {
     //ui
     game.load.image('uibox', 'Images/ui/box.png');
     game.load.image('uibc', 'Images/ui/bcbox.png');
+    game.load.image('uid', 'Images/ui/dbox.png');
+    game.load.image('uig', 'Images/ui/gbox.png');
+		
     
 		// Audio
 		// game.load.audio('sLaser', 'Audio/laser.wav');

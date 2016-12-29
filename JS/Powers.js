@@ -2,9 +2,10 @@
 function getPowers(tile){
   var powers = [];
   switch(tile.code){
-    case 'h':
-      powers.push({img: 'uibc', pattern: 'star-w'});
-      powers.push({img: 'uibox', pattern: 'star'});
+    case 'bh':
+    case 'gh':
+      powers.push({img: 'uid', pattern: 'star-w', changeTo: 'd'});
+      powers.push({img: 'uig', pattern: 'ring-w', changeTo: 'g'});
       powers.push({img: 'uibox', pattern: 'single'});
   }
   return powers;

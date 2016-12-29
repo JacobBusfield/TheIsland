@@ -1,4 +1,4 @@
-var isoGroup;
+var isoGroup, water = [];
 var selected = new Selected(); 
 var ui; 
   
@@ -14,8 +14,6 @@ var Grid = function(game){
     ['w', 'g', 'g', 'g', 'g', 'g', 'w'],
     ['w', 'g', 'g', 'g', 'g', 'g', 'w'],
     ['w', 'w', 'w', 'w', 'w', 'w', 'w']];
-    
-  this.water = [];
 
   // Add tiles to map
   var size = 76;
@@ -25,20 +23,11 @@ var Grid = function(game){
     for (var yy = 0; yy < size*7; yy += size) {
       // Create a tile using the new game.add.isoSprite factory method at the specified position.
       // The last parameter is the group you want to add it to (just like game.add.sprite)
-      tile = game.add.isoSprite(xx, yy, 0, this.grid[i][j], 1, isoGroup);
+      tile = game.add.isoSprite(xx, yy, 0, this.grid[i][j], 1, isoGroup);     
       tile.isoGroupIndex = (7*i)+j;
-      if(this.grid[i][j] === 'bh' || this.grid[i][j] === 'gh'){
-        tile.anchor.set(0.5, 0.31);
-        tile.code = 'h';
-      }
-      else if (this.grid[i][j] === 'w') {
-        tile.anchor.set(0.5, 0);
-        tile.code = 'w';
-        this.water.push(tile);
-      }
-      else{
-        tile.anchor.set(0.5, 0);
-      }
+      tile.changeTo = changeTo;
+      tile.changeTo(this.grid[i][j]);
+      
       j+=1;
     }
     i+=1;
@@ -93,7 +82,7 @@ var Grid = function(game){
     });
 
     // Wobble water tiles
-    this.water.forEach(function (w) {
+    water.forEach(function (w) {
         w.isoZ = (-2 * Math.sin((game.time.now + (w.isoX * 7)) * 0.004)) + (-1 * Math.sin((game.time.now + (w.isoY * 8)) * 0.005));
         w.alpha = Phaser.Math.clamp(1 + (w.isoZ * 0.1), 0.2, 1);
     });
