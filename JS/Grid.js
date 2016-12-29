@@ -53,6 +53,8 @@ var Grid = function(game){
       ui.clear();
       selected.clearNeighbours();
       
+      game.iso.unproject(game.input.activePointer.position, cursorPos); // bug fix to ensure mobile devices always update cursor position
+      
       isoGroup.forEach(function (tile) {
         var inBounds = tile.isoBounds.containsXY(cursorPos.x, cursorPos.y);
         if(inBounds){
