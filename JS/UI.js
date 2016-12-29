@@ -75,6 +75,8 @@ var UI = function(){
         game.turn.toggle();
         
         uiGroup.hovered = false;
+        
+        checkWinningCondition();
       }, this);
       
       uiGroup.add(box);

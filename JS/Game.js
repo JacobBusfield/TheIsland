@@ -32,11 +32,11 @@ Game.Boot.prototype =
     this.grid.update();
   },
   render: function () {    
-    game.debug.text(game.time.fps || '--', 2, 14, "#000000");
-    game.debug.text("Cursor:  X: " + cursorPos.x.toFixed(2)+ " Y: " + cursorPos.y.toFixed(2), 2, 36, "#000000");
-    if (selected.isActive()){
-     game.debug.text("Cursor:  X: " + selected.getPos().x.toFixed(2)+ " Y: " + selected.getPos().y.toFixed(2), 2, 58, "#000000");
-    }
+    game.debug.text(game.time.fps || '--', 2, 14, "#bbbbbb");
+    // game.debug.text("Cursor:  X: " + cursorPos.x.toFixed(2)+ " Y: " + cursorPos.y.toFixed(2), 2, 36, "#000000");
+    // if (selected.isActive()){
+    //  game.debug.text("Cursor:  X: " + selected.getPos().x.toFixed(2)+ " Y: " + selected.getPos().y.toFixed(2), 2, 58, "#000000");
+    // }
     //game.debug.text("Player 1: " + game.turn.isPlayerOne(), 2, 80, "#000000");
   }
 };

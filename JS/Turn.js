@@ -1,3 +1,5 @@
+var winner = 0;
+
 var Turn = function(){
   var playerOnesTurn = true;
 
@@ -32,6 +34,32 @@ var Turn = function(){
     else{
       return 'g';
     }
+  }
+}
+
+function checkWinningCondition(){
+  var brownHouseCount = 0;
+  var greyHouseCount = 0;
+  isoGroup.forEach(function(tile) {
+    if (tile.code === 'bh'){
+      brownHouseCount += 1;
+    }
+    else if (tile.code === 'gh'){
+      greyHouseCount += 1;
+    }
+  });
+  
+  if (brownHouseCount === greyHouseCount === 0){
+    winner = 0;
+    game.state.start('EndScreen');
+  }
+  else if (brownHouseCount === 0){
+    winner = 2;
+    game.state.start('EndScreen');
+  }
+  else if (greyHouseCount === 0){
+    winner = 1;
+    game.state.start('EndScreen');
   }
 }
 
