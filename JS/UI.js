@@ -36,8 +36,12 @@ var UI = function(){
   
   // Private Functions
   function addUIElement(power, tile, x, y){
-    var box = uiGroup.getFirstDead();
+    // check y will make ui on the map, if not changeTo
+    if (y < 100){
+      y = 100;
+    }    
     
+    var box = uiGroup.getFirstDead();
     if (box === null) {
       var box = new Phaser.Sprite(game, x, y, power.img);
       box.tile = tile; // (above) need to do after NEW but before EVENTS  

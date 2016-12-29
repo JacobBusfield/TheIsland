@@ -12,7 +12,9 @@ Game.Boot.prototype =
     game.stage.disableVisibilityChange = true;
     game.plugins.add(new Phaser.Plugin.Isometric(game));
     game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);
-    game.stage.backgroundColor = "#fdfd96";
+    game.bgImg = game.add.sprite(0, 0, 'backgroundimg');
+    game.bgImg.tint = 0xfdfd96;
+    //game.stage.backgroundColor = "#fdfd96";
     game.iso.anchor.setTo(0.5, 0.02);
   },
   create: function () {
@@ -30,11 +32,11 @@ Game.Boot.prototype =
     this.grid.update();
   },
   render: function () {    
-    game.debug.text(game.time.fps || '--', 2, 14, "#ffffff");
-    game.debug.text("Cursor:  X: " + cursorPos.x.toFixed(2)+ " Y: " + cursorPos.y.toFixed(2), 2, 36, "#ffffff");
+    game.debug.text(game.time.fps || '--', 2, 14, "#000000");
+    game.debug.text("Cursor:  X: " + cursorPos.x.toFixed(2)+ " Y: " + cursorPos.y.toFixed(2), 2, 36, "#000000");
     if (selected.isActive()){
-     game.debug.text("Cursor:  X: " + selected.getPos().x.toFixed(2)+ " Y: " + selected.getPos().y.toFixed(2), 2, 58, "#ffffff");
+     game.debug.text("Cursor:  X: " + selected.getPos().x.toFixed(2)+ " Y: " + selected.getPos().y.toFixed(2), 2, 58, "#000000");
     }
-    game.debug.text("Player 1: " + game.turn.isPlayerOne(), 2, 80, "#ffffff");
+    //game.debug.text("Player 1: " + game.turn.isPlayerOne(), 2, 80, "#000000");
   }
 };

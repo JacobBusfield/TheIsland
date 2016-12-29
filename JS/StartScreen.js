@@ -3,7 +3,7 @@ var StartScreen = {
     },
 
     create: function () {
-      this.buttonStart = game.add.button(game.world.centerX - 95, 450, 'imgStartButton', this.startGame, this, 1,0);
+      this.buttonStart = game.add.button(game.world.centerX - 95, 400, 'imgStartButton', this.startGame, this, 1,0);
     },
 
     startGame: function () {

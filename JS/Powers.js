@@ -23,6 +23,21 @@ function getPowers(tile){
       break;
     case 'd':
       powers.push({img:'ui'+game.turn.getPrefix()+'h', pattern: 'me', changeTo: game.turn.getPrefix()+'h'});
+      powers.push({img:'ui'+game.turn.getPrefix()+'c', pattern: 'me', changeTo: game.turn.getPrefix()+'c'});
+      break;
+    case 'bc':
+    case 'gc':
+      powers.push({img:'ui'+game.turn.getPrefix()+'cup', pattern: 'me', changeTo: game.turn.getPrefix()+'c2'});
+      powers.push({img: 'uig', pattern: 'ring-w', changeTo: 'g'});
+      break;
+    case 'bc2':
+    case 'gc2':
+      powers.push({img:'ui'+game.turn.getPrefix()+'cup', pattern: 'me', changeTo: game.turn.getPrefix()+'c3'});
+      powers.push({img: 'uig', pattern: 'ring2-w', changeTo: 'g'});
+      break;
+    case 'bc3':
+    case 'gc3':
+      powers.push({img: 'uig', pattern: 'ring3-w', changeTo: 'g'});
       break;
   }
   return powers;

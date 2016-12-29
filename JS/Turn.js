@@ -8,11 +8,11 @@ var Turn = function(){
   this.toggle = function(){
     if (playerOnesTurn === true){
       playerOnesTurn = false;
-      game.stage.backgroundColor = "#ff6961";
+      tweenTint(game.bgImg, 0xfdfd96, 0xff6961, 1000);
     }
     else{
       playerOnesTurn = true;
-      game.stage.backgroundColor = "#fdfd96";
+      tweenTint(game.bgImg, 0xff6961, 0xfdfd96, 1000);
     }
   }
   
@@ -46,4 +46,14 @@ function isTilePlayable(tile){
     return false;
   }
   return true;
+}
+
+function tweenTint(obj, startColor, endColor, time) {
+  var colorBlend = {step: 0};    
+  var colorTween = game.add.tween(colorBlend).to({step: 100}, time);          
+  colorTween.onUpdateCallback(function() {      
+    obj.tint = Phaser.Color.interpolateColor(startColor, endColor, 100, colorBlend.step);       
+  });         
+  obj.tint = startColor;  
+  colorTween.start();
 }

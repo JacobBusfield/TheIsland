@@ -12,67 +12,58 @@ function getNeighbours(tile, pattern){
   
   switch(pattern){
     case 'me':
-      n.push(isoGroup.children[tile.isoGroupIndex]);
+      return [isoGroup.children[tile.isoGroupIndex]];
       break;
       
-    case 'star':
-      if (tile.isoGroupIndex-7 >= 0){
-        n.push(isoGroup.children[tile.isoGroupIndex - 7]);
-      }
-      if ((tile.isoGroupIndex-1 >= 0) && (tile.isoGroupIndex % 7 !== 0)){ // check for grid underlap
-        n.push(isoGroup.children[tile.isoGroupIndex - 1]);
-      }
-      if ((tile.isoGroupIndex+1 < 49)&& (tile.isoGroupIndex % 7 !== 6)){  // check for grid overlap
-        n.push(isoGroup.children[tile.isoGroupIndex + 1]);
-      }
-      if (tile.isoGroupIndex+7 < 49){
-        n.push(isoGroup.children[tile.isoGroupIndex + 7]);
-      }
-      break;
-      
-    case 'ring-w': // RING-W CARRIES ON TO USE STAR-W
-      if ((tile.isoGroupIndex-8 >= 0) && (tile.isoGroupIndex % 7 !== 0)){ // check for grid underlap
-        if (isoGroup.children[tile.isoGroupIndex - 8].code !== 'w'){
-          n.push(isoGroup.children[tile.isoGroupIndex - 8]);
-        }
-      }
-      if ((tile.isoGroupIndex-6 >= 0)&& (tile.isoGroupIndex % 7 !== 6)){  // check for grid overlap
-        if (isoGroup.children[tile.isoGroupIndex - 6].code !== 'w'){
-          n.push(isoGroup.children[tile.isoGroupIndex - 6]);
-        }
-      }
-      if ((tile.isoGroupIndex+6 < 49) && (tile.isoGroupIndex % 7 !== 0)){ // check for grid underlap
-        if (isoGroup.children[tile.isoGroupIndex + 6].code !== 'w'){
-          n.push(isoGroup.children[tile.isoGroupIndex + 6]);
-        }
-      }
-      if ((tile.isoGroupIndex+8 < 49)&& (tile.isoGroupIndex % 7 !== 6)){  // check for grid overlap
-        if (isoGroup.children[tile.isoGroupIndex + 8].code !== 'w'){
-          n.push(isoGroup.children[tile.isoGroupIndex + 8]);
-        }
-      } // RING-W CARRIES ON TO USE STAR-W
     case 'star-w':
-      if (tile.isoGroupIndex-7 >= 0){
-        if (isoGroup.children[tile.isoGroupIndex - 7].code !== 'w'){
-           n.push(isoGroup.children[tile.isoGroupIndex - 7]);
-        }
-      }
-      if ((tile.isoGroupIndex-1 >= 0) && (tile.isoGroupIndex % 7 !== 0)){ // check for grid underlap
-        if (isoGroup.children[tile.isoGroupIndex - 1].code !== 'w'){
-          n.push(isoGroup.children[tile.isoGroupIndex - 1]);
-        }
-      }
-      if ((tile.isoGroupIndex+1 < 49)&& (tile.isoGroupIndex % 7 !== 6)){  // check for grid overlap
-        if (isoGroup.children[tile.isoGroupIndex + 1].code !== 'w'){
-          n.push(isoGroup.children[tile.isoGroupIndex + 1]);
-        }
-      }
-      if (tile.isoGroupIndex+7 < 49){
-        if (isoGroup.children[tile.isoGroupIndex + 7].code !== 'w'){
-          n.push(isoGroup.children[tile.isoGroupIndex + 7]);
-        }
-      }
+      return neighbourCheckFollowing(
+        tile.isoGroupIndex,
+        [-7, -1, 1, 7],
+        true
+      );
       break;
+      
+    case 'ring-w':
+      return neighbourCheckFollowing(
+        tile.isoGroupIndex,
+        [-8, -7, -6, -1, 1, 6, 7, 8],
+        true
+      );
+      break;  
+      
+    case 'ring2-w':
+      return neighbourCheckFollowing(
+        tile.isoGroupIndex,
+        [-16, -15, -14, -13, -12, -9, -5, -2, 2, 5, 9, 12, 13, 14, 15, 16],
+        true
+      );
+      break;
+      
+    case 'ring3-w':
+      return neighbourCheckFollowing(
+        tile.isoGroupIndex,
+        [-24, -23, -22, -21, -20, -19, -18, -17, -11, -10, -4, -3,
+          24,  23,  22,  21,  20,  19,  18,  17,  11,  10,  4,  3],
+        true
+      );
+      break;   
   }
   return n;
+}
+
+function neighbourCheckFollowing(index, offsets, removeWater){
+  var indices = [];
+  
+  for(var i = 0; i < offsets.length; i++){
+    var sum = index + offsets[i];
+    if((sum < 49) && (sum >= 0)){                 // ignore out of bounds
+      if ((index % 7 === 5) && (sum % 7 === 1)){}     // ignore overflow
+      else if ((index % 7 === 1) && (sum % 7 === 5)){}// ignore underflow
+      else if (removeWater && isoGroup.children[sum].code === 'w'){}//ignore water if desired
+      else{
+        indices.push(isoGroup.children[sum]);
+      }
+    }
+  }
+  return indices;
 }

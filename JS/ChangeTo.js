@@ -18,5 +18,18 @@ changeTo = function(changeCode){
     case 'gh':
       this.anchor.set(0.5, 0.31);
       break;
+      
+    case 'bc':
+    case 'gc':
+      this.anchor.set(0.5, 0.20);
+      break;
+    case 'bc2':
+    case 'gc2':
+      this.anchor.set(0.5, 0.29);
+      break;
+    case 'bc3':
+    case 'gc3':
+      this.anchor.set(0.5, 0.38);
+      break;
   }
 }

@@ -17,6 +17,8 @@ var PreLoad = {
 		
 		/** GAME ASSETS **/
 		// 
+    game.load.image('backgroundimg', 'Images/backgroundimg.png');
+    
 		// Images 
     game.load.image('w', 'Images/tiles/water.png');
     game.load.image('g', 'Images/tiles/grass.png');
@@ -24,7 +26,14 @@ var PreLoad = {
     game.load.image('d', 'Images/tiles/dirt.png');
     
     game.load.image('bh', 'Images/tiles/bhgrass.png');
+    game.load.image('bc', 'Images/tiles/bcgrass.png');
+    game.load.image('bc2', 'Images/tiles/bcgrass2.png');
+    game.load.image('bc3', 'Images/tiles/bcgrass3.png');
+    
     game.load.image('gh', 'Images/tiles/ghgrass.png');
+    game.load.image('gc', 'Images/tiles/gcgrass.png');
+    game.load.image('gc2', 'Images/tiles/gcgrass2.png');
+    game.load.image('gc3', 'Images/tiles/gcgrass3.png');
 
 		// Sprite sheets
 		game.load.spritesheet('imgStartButton', 'Images/startButton.png', 193, 67);
@@ -36,9 +45,12 @@ var PreLoad = {
     game.load.image('uig', 'Images/ui/gbox.png');
     
     game.load.image('uibc', 'Images/ui/bcbox.png');
+    game.load.image('uibcup', 'Images/ui/bcboxup.png');
     game.load.image('uibh', 'Images/ui/bhbox.png');
+    
+    game.load.image('uigc', 'Images/ui/gcbox.png');
+    game.load.image('uigcup', 'Images/ui/gcboxup.png');
     game.load.image('uigh', 'Images/ui/ghbox.png');
-		
     
 		// Audio
 		// game.load.audio('sLaser', 'Audio/laser.wav');
