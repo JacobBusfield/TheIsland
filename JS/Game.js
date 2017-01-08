@@ -20,6 +20,9 @@ Game.Boot.prototype =
   create: function () {
     game.turn = new Turn();
     this.grid = new Grid(game);
+    
+    this.help = new Help();
+    
     game.physics.isoArcade.gravity.setTo(0, 0, -500);
     cursorPos = new Phaser.Plugin.Isometric.Point3();
   },

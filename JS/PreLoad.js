@@ -16,8 +16,9 @@ var PreLoad = {
 				
 		
 		/** GAME ASSETS **/
-		// 
+		// Large BG images
     game.load.image('backgroundimg', 'Images/backgroundimg.png');
+    game.load.image('tutorial', 'Images/tutorial.png');
     
 		// Images 
     game.load.image('w', 'Images/tiles/water.png');
@@ -39,7 +40,7 @@ var PreLoad = {
 		game.load.spritesheet('imgStartButton', 'Images/startButton.png', 193, 67);
     
     
-    //ui
+    // UI (Clickable boxes)
     game.load.image('uibox', 'Images/ui/box.png');
     game.load.image('uid', 'Images/ui/dbox.png');
     game.load.image('uig', 'Images/ui/gbox.png');
@@ -51,6 +52,10 @@ var PreLoad = {
     game.load.image('uigc', 'Images/ui/gcbox.png');
     game.load.image('uigcup', 'Images/ui/gcboxup.png');
     game.load.image('uigh', 'Images/ui/ghbox.png');
+    
+    // UI (Help)
+    game.load.image('uiq', 'Images/ui/question.png');
+    game.load.image('uic', 'Images/ui/cross.png');
     
 		// Audio
 		// game.load.audio('sLaser', 'Audio/laser.wav');
