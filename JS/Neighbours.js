@@ -9,12 +9,12 @@ function toggleNeighbours(tile, pattern){
 // -- Used to specify which tiles a pattern highlights and then uses. --//
 function getNeighbours(tile, pattern){
   var n = [];
-  
+
   switch(pattern){
     case 'me':
       return [isoGroup.children[tile.isoGroupIndex]];
       break;
-      
+
     case 'star-w':
       return neighbourCheckFollowing(
         tile.isoGroupIndex,
@@ -22,15 +22,15 @@ function getNeighbours(tile, pattern){
         true
       );
       break;
-      
+
     case 'ring-w':
       return neighbourCheckFollowing(
         tile.isoGroupIndex,
         [-8, -7, -6, -1, 1, 6, 7, 8],
         true
       );
-      break;  
-      
+      break;
+
     case 'ring2-w':
       return neighbourCheckFollowing(
         tile.isoGroupIndex,
@@ -38,7 +38,7 @@ function getNeighbours(tile, pattern){
         true
       );
       break;
-      
+
     case 'ring3-w':
       return neighbourCheckFollowing(
         tile.isoGroupIndex,
@@ -46,14 +46,14 @@ function getNeighbours(tile, pattern){
           24,  23,  22,  21,  20,  19,  18,  17,  11,  10,  4,  3],
         true
       );
-      break;   
+      break;
   }
   return n;
 }
 
 function neighbourCheckFollowing(index, offsets, removeWater){
   var indices = [];
-  
+
   for(var i = 0; i < offsets.length; i++){
     var sum = index + offsets[i];
     if((sum < 49) && (sum >= 0)){                 // ignore out of bounds

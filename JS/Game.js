@@ -20,9 +20,9 @@ Game.Boot.prototype =
   create: function () {
     game.turn = new Turn();
     this.grid = new Grid(game);
-    
+
     this.help = new Help();
-    
+
     game.physics.isoArcade.gravity.setTo(0, 0, -500);
     cursorPos = new Phaser.Plugin.Isometric.Point3();
   },
@@ -34,7 +34,7 @@ Game.Boot.prototype =
 
     this.grid.update();
   },
-  render: function () {    
+  render: function () {
     game.debug.text(game.time.fps || '--', 2, 14, "#bbbbbb");
     // game.debug.text("Cursor:  X: " + cursorPos.x.toFixed(2)+ " Y: " + cursorPos.y.toFixed(2), 2, 36, "#000000");
     // if (selected.isActive()){

@@ -7,12 +7,12 @@ function getPowers(tile){
   else if ((tile.code.charAt(0) == 'g') && (game.turn.isPlayerOne())){
     return [];
   }
-  
+
   // NEXT disable tile not adjacent to freindly structures.
   if(!isTilePlayable(tile)){
     return [];
   }
-    
+
   // OK - Get powers available to the player
   var powers = [];
   switch(tile.code){

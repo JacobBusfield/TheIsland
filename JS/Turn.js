@@ -6,7 +6,7 @@ var Turn = function(){
   this.isPlayerOne = function(){
     return playerOnesTurn;
   }
-  
+
   this.toggle = function(){
     if (playerOnesTurn === true){
       playerOnesTurn = false;
@@ -17,7 +17,7 @@ var Turn = function(){
       tweenTint(game.bgImg, 0xff6961, 0xfdfd96, 1000);
     }
   }
-  
+
   this.tint = function(){
     if (playerOnesTurn === true){
       return 0xcfcf00;
@@ -26,7 +26,7 @@ var Turn = function(){
       return 0xff5555;
     }
   }
-  
+
   this.getPrefix = function(){
     if (playerOnesTurn === true){
       return 'b';
@@ -48,7 +48,7 @@ function checkWinningCondition(){
       greyHouseCount += 1;
     }
   });
-  
+
   if (brownHouseCount === greyHouseCount === 0){
     winner = 0;
     game.state.start('EndScreen');
@@ -77,11 +77,11 @@ function isTilePlayable(tile){
 }
 
 function tweenTint(obj, startColor, endColor, time) {
-  var colorBlend = {step: 0};    
-  var colorTween = game.add.tween(colorBlend).to({step: 100}, time);          
-  colorTween.onUpdateCallback(function() {      
-    obj.tint = Phaser.Color.interpolateColor(startColor, endColor, 100, colorBlend.step);       
-  });         
-  obj.tint = startColor;  
+  var colorBlend = {step: 0};
+  var colorTween = game.add.tween(colorBlend).to({step: 100}, time);
+  colorTween.onUpdateCallback(function() {
+    obj.tint = Phaser.Color.interpolateColor(startColor, endColor, 100, colorBlend.step);
+  });
+  obj.tint = startColor;
   colorTween.start();
 }
